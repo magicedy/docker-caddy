@@ -1,3 +1,7 @@
+ARG DOCKER_REGISTRY=gcr.io
+
+ARG DISTROLESS_NAME=static-debian12
+
 FROM caddy:builder-alpine AS builder
 
 ENV XCADDY_GO_BUILD_FLAGS="-ldflags '-w -s'"
@@ -13,6 +17,8 @@ RUN apk add --no-cache binutils \
 RUN apk add --no-cache upx \
     && upx --lzma --best /usr/bin/caddy
 
-FROM caddy:latest
+FROM ${DOCKER_REGISTRY}/distroless/${DISTROLESS_NAME}
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+
+CMD ["/usr/bin/caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
