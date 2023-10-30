@@ -1,14 +1,12 @@
+ARG CADDY_VERSION="v2.7.5"
 ARG DOCKER_REGISTRY=gcr.io
-
 ARG DISTROLESS_NAME=static-debian12
 
 FROM caddy:builder-alpine AS builder
 
-ENV CADDY_VERSION="v2.7.5"
-
 ENV XCADDY_GO_BUILD_FLAGS="-ldflags '-w -s'"
 
-RUN xcaddy build \
+RUN xcaddy build ${CADDY_VERSION} \
     --with github.com/caddy-dns/duckdns
 
 RUN apk add --no-cache binutils \
