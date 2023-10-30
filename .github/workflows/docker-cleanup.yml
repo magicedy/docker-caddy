@@ -27,3 +27,23 @@ jobs:
           scheme: "pull_request"
           repo_name: "docker-caddy"
           match_regex: '^pr-(\d+)$|^(\d+)$'
+
+  cleanup-untagged-images:
+    name: Cleanup Untagged Images Tags for ${{ matrix.primary-name }}
+    runs-on: ubuntu-latest
+    needs:
+      - cleanup-images
+    env:
+      # Requires a personal access token with the OAuth scope delete:packages
+      TOKEN: ${{ secrets.PACKAGE_DELETE_TOKEN }}
+    steps:
+      -
+        name: Clean untagged images
+        if: "${{ env.TOKEN != '' }}"
+        uses: stumpylog/image-cleaner-action/untagged@v0.3.0
+        with:
+          token: "${{ env.TOKEN }}"
+          owner: "magicedy"
+          do_delete: "true"
+          is_org: "false"
+          package_name: "docker-caddy"
