@@ -2,7 +2,7 @@ FROM caddy:builder-alpine AS builder
 
 ENV XCADDY_GO_BUILD_FLAGS="-ldflags '-w -s'"
 
-ENV CADDY_VERSION ="v2.7.5"
+ENV CADDY_VERSION="v2.7.5"
 
 RUN xcaddy build \
     --with github.com/caddy-dns/duckdns
