@@ -19,6 +19,12 @@ FROM ${DOCKER_REGISTRY}/distroless/${DISTROLESS_NAME}
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 
-ENTRYPOINT ["/usr/bin/caddy"]
+ENV XDG_CONFIG_HOME /config
+ENV XDG_DATA_HOME /data
 
-CMD ["run", "--config", "/etc/caddy/Caddyfile"]
+EXPOSE 80
+EXPOSE 443
+EXPOSE 443/udp
+EXPOSE 2019
+
+CMD ["/usr/bin/caddy", "run", "--config", "/etc/caddy/Caddyfile"]
