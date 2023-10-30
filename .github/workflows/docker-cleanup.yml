@@ -20,10 +20,10 @@ jobs:
         uses: stumpylog/image-cleaner-action/ephemeral@v0.3.0
         with:
           token: "${{ env.TOKEN }}"
-          owner: "${{ github.actor }}"
+          owner: "magicedy"
           is_org: "false"
           do_delete: "true"
-          package_name: "${{ github.repository }}"
+          package_name: "docker-caddy"
           scheme: "pull_request"
-          repo_name: "${{ github.repository }}"
+          repo_name: "docker-caddy"
           match_regex: '^pr-(\d+)$|^(\d+)$'
