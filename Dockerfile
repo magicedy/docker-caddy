@@ -4,6 +4,8 @@ ARG DISTROLESS_NAME=static-debian12
 
 FROM caddy:builder-alpine AS builder
 
+ENV CADDY_VERSION="v2.7.5"
+
 ENV XCADDY_GO_BUILD_FLAGS="-ldflags '-w -s'"
 
 RUN xcaddy build \
