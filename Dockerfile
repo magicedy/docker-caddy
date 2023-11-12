@@ -1,6 +1,6 @@
 ARG CADDY_VERSION="v2.7.5"
 ARG DOCKER_REGISTRY=gcr.io
-ARG DISTROLESS_NAME=static-debian12:nonroot
+ARG DISTROLESS_NAME=static-debian12
 ARG TARGETPLATFORM=linux/amd64
 
 FROM caddy:builder-alpine AS builder
@@ -20,6 +20,5 @@ COPY --from=ghcr.io/magicedy/healthcheck:latest /healthcheck /healthcheck
 ENV XDG_CONFIG_HOME /config
 ENV XDG_DATA_HOME /data
 EXPOSE 80 443 443/udp 2019
-USER 1000:1000
 
 CMD ["/usr/bin/caddy", "run", "--config", "/etc/caddy/Caddyfile"]
