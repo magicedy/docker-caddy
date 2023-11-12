@@ -16,7 +16,7 @@ RUN strip /usr/bin/caddy && \
 FROM ${DOCKER_REGISTRY}/distroless/${DISTROLESS_NAME}
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
-COPY --from=${DOCKER_REGISTRY}/magicedy/healthcheck:latest /healthcheck /healthcheck
+COPY --from=ghcr.io/magicedy/healthcheck:latest /healthcheck /healthcheck
 ENV XDG_CONFIG_HOME /config
 ENV XDG_DATA_HOME /data
 EXPOSE 80 443 443/udp 2019
