@@ -5,7 +5,8 @@ ARG TARGETPLATFORM=linux/amd64
 
 FROM caddy:builder-alpine AS builder
 ENV XCADDY_GO_BUILD_FLAGS="-ldflags '-w -s'"
-RUN xcaddy build ${CADDY_VERSION} \
+RUN xcaddy build \
+    --with github.com/caddyserver/caddy/v2=github.com/magicedy/caddy/v2@master \
     --with github.com/caddy-dns/duckdns
 RUN apk add --no-cache binutils upx
 RUN strip /usr/bin/caddy && \
