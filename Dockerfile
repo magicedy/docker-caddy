@@ -1,6 +1,6 @@
-ARG CADDY_VERSION="v2.10.2"
+ARG CADDY_VERSION="v2.11.2"
 ARG DOCKER_REGISTRY=gcr.io
-ARG DISTROLESS_NAME=static-debian12
+ARG DISTROLESS_NAME=static-debian13
 ARG TARGETPLATFORM=linux/amd64
 
 FROM caddy:builder-alpine AS builder
